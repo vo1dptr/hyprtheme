@@ -1,0 +1,75 @@
+#!/bin/sh
+# THIS SCRIPT WILL BE AUTOMATICALLY RUN BY HYPRV
+
+source ./Colors
+DIR_PATH="$(dirname "$(realpath "$0")")"
+
+# Install Neovim
+read -p "Do you want to install Neovim? (Y/n) " install_neovim_choice
+if [[ "$install_neovim_choice" =~ ^[Yy]$ ]]; then
+    sudo pacman -S --noconfirm neovim
+    echo -e "${GREEN}Neovim installed.${NC}"
+
+    # Install JetBrains Mono Nerd Font
+    sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd
+    echo -e "${GREEN}JetBrains Mono Nerd Font installed.${NC}"
+
+    read -p "Do you want to configure Neovim? (Y/n) " configure_neovim_choice
+    if [[ "$configure_neovim_choice" =~ ^[Yy]$ ]]; then
+        sudo git clone --depth 1 https://github.com/AstroNvim/template /root/.config/nvim && rm -rf /root/.config/nvim/.git
+        git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim && rm -rf ~/.config/nvim/.git
+        echo -e "${GREEN}Neovim configured for both user $USER and root.${NC}"
+    fi
+fi
+
+# Configure Vim if Neovim is not installed
+if [[ ! "$install_neovim_choice" =~ ^[Yy]$ ]]; then
+    read -p "Do you want to configure Vim? (Y/n) " configure_vim_choice
+    if [[ "$configure_vim_choice" =~ ^[Yy]$ ]]; then
+        rm -rf ~/.vimrc
+        curl https://raw.githubusercontent.com/AlessandroYorba/Alduin/master/colors/alduin.vim -o ~/.vimrc
+        sudo rm -rf /root/.vimrc
+        sudo curl https://raw.githubusercontent.com/AlessandroYorba/Alduin/master/colors/alduin.vim -o /root/.vimrc
+        echo -e "${GREEN}Vim configured for both user $USER and root.${NC}"
+    fi
+fi
+
+# Create symbolic links for Waybar config and style files
+ln -s "/home/$USER/.config/waybar/style/[Dark] Latte-Wallust combined.css" ~/.config/waybar/style.css
+ln -s "/home/$USER/.config/waybar/configs/[TOP] Default Laptop_v2" ~/.config/waybar/config
+
+# Install Yay if not already installed
+if ! command -v yay >/dev/null 2>&1; then
+    echo -e "${YELLOW}Installing yay...${NC}"
+    git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm
+    cd ..
+    rm -rf yay
+    echo -e "${GREEN}Yay installed.${NC}"
+else
+    echo -e "${GREEN}Yay is already installed.${NC}"
+fi
+
+# Install additional tools using Yay
+read -p "Do you want to install additional tools (swaylock, swayidle, wlogout, swww)? (Y/n) " install_tools_choice
+if [[ "$install_tools_choice" =~ ^[Yy]$ ]]; then
+    yay -S swaylock swayidle wlogout swww
+    echo -e "${GREEN}Additional tools installed.${NC}"
+fi
+
+# Move custom tools to /usr/bin
+read -p "Do you want to move custom tools to /usr/bin? Recommended (Y/n) " move_tools_choice
+if [[ "$move_tools_choice" =~ ^[Yy]$ ]]; then
+    sudo chmod +x "$DIR_PATH"/bin/* && sudo cp "$DIR_PATH"/bin/* /usr/bin
+    echo -e "${GREEN}Tools moved to /usr/bin folder.${NC}"
+fi
+
+# Setup Zsh
+read -p "Do you want to setup Zsh? (Y/n) " setup_zsh_choice
+if [[ "$setup_zsh_choice" =~ ^[Yy]$ ]]; then
+    if command -v curl >/dev/null 2>&1; then
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)"
+    else
+        sh -c "$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)"
+    fi
+    echo -e "${GREEN}Zsh setup completed.${NC}"
+fi

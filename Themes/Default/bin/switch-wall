@@ -1,0 +1,36 @@
+#!/bin/bash
+#
+# github.com/0x76OID/HyprV
+
+style=~/.config/wofi/style.css
+config=~/.config/wofi/config
+Directory=~/.config/wall/wallpaper
+Wallpapers=($(ls ${Directory}))
+Random=${Wallpapers[$RANDOM % ${#Wallpapers[@]}]}
+
+wofi_command="wofi --show dmenu \
+			--prompt Choose... \
+			--conf ${config} --style ${style} \
+			--width=300 --height=300 \
+			--cache-file=/dev/null \
+			--hide-scroll --no-actions \
+			--define=matching=fuzzy"
+
+menu() {
+  options=("Smile" "Dark Night" "Dream" "Space" "Pink" "Dark Brown" "Coffee" "Dark Blue" "Hyprland" "Random Choice")  
+  for i in "${!options[@]}"; do
+    printf "%d. %s\n" "$((i + 1))" "${options[$i]}"
+  done
+}
+
+swww query || swww init
+
+choice=$(menu | ${wofi_command} | cut -d. -f1)
+case $choice in
+  [1-9])
+    swww img ${Directory}/00$choice.* --transition-fps 30 --transition-type any --transition-duration 3
+    ;;
+  10)
+    swww img ${Directory}/${Random} --transition-fps 30 --transition-type any --transition-duration 3
+    ;;
+esac 

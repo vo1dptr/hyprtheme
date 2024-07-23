@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# github.com/0x76OID/HyprV
+
+
+Directory=~/.config/wall/wallpaper
+Wallpapers=($(ls ${Directory}))
+
+Random=${Wallpapers[$RANDOM % ${#Wallpapers[@]}]}
+
+swaylock --indicator -ef -i "${Directory}/${Random}"
+
