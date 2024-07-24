@@ -141,4 +141,4 @@ case $main_choice in
         ;;
 esac
 
-echo -e "\n\n${GREEN}Setup completed. Enjoy!!!${NC}"
+echo -e "\n\n${GREEN}Enjoy!!!${NC}"

@@ -16,8 +16,8 @@ if [[ "$install_neovim_choice" =~ ^[Yy]$ ]]; then
 
     read -p "Do you want to configure Neovim? (Y/n) " configure_neovim_choice
     if [[ "$configure_neovim_choice" =~ ^[Yy]$ ]]; then
-        sudo git clone --depth 1 https://github.com/AstroNvim/template /root/.config/nvim && rm -rf /root/.config/nvim/.git
-        git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim && rm -rf ~/.config/nvim/.git
+        sudo git clone --depth 1 https://github.com/AstroNvim/template /root/.config/nvim
+        git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
         echo -e "${GREEN}Neovim configured for both user $USER and root.${NC}"
     fi
 fi

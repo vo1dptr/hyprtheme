@@ -13,7 +13,7 @@ ask_remove() {
 read -p "Delete whole theme configs with all tools? (Y/n) Not Recommended" del_all
 if [[ "$del_all" =~ ^[Yy]$ ]]; then
     sudo pacman -Rns --noconfirm "$DIR_PATH"/Requirements/Requirements.txt
-    sudo rm -rf ~/.config/nvim /root/.config/nvim ~/.config/waybar ~/.config/waybar
+    sudo rm -rf /root/.config/nvim ~/.config/nvim ~/.config/waybar ~/.config/wlogout ~/.config/alacritty ~/.config/neofetch ~/.config/swaylock ~/.config/wofi ~/.config/wall
     sudo rm -rf ~/.vimrc /root/.vimrc
     sudo rm -rf /usr/bin/lock /usr/bin/switch-wall
     echo -e "${GREEN}Whole theme and tools removed.${NC}"
