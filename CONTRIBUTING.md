@@ -26,7 +26,7 @@ Welcome to the contribution guidelines for hyprtheme! I appreciate your interest
   - Add your theme folder in the [Themes](Themes) directory.
   
   - **Optionally**, add a README for your theme including a preview.
-      - You may also include a "Hypr_RUN" script like the one [here](Themes/Default/Hypr_RUN) if you want to automate any processes,
+      - You may also include a "Hypr_RUN" script like the one [here](Themes/Default/Hypr_RUN) if you want to automate any processes.
       - Or a "Hypr_UNINSTALL" script like the one [here](Themes/Default/Hypr_UNINSTALL) if you want to provide an uninstall option for your theme.
       - These scripts will be automatically run by the [hyprtheme](hyprtheme.sh) script.
 
