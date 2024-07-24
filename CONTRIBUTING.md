@@ -25,7 +25,7 @@ Welcome to the contribution guidelines for HyprV! I appreciate your interest in 
   - Push your changes to your fork of the repository
   - Make a pull request to submit your contribution
 
-### Note: I would highly suggest you take a look at the default theme since it's a great example. You can find it [here](https://github.com/0x76OID/HyprV-Beta/tree/main/Themes/Default).
+### Note: I would highly suggest you take a look at the default theme since it's a great example. You can find it [here](https://github.com/0x76OID/HyprV/tree/main/Themes/Default).
 
 </details>
 
