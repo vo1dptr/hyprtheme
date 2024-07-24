@@ -1,5 +1,5 @@
 #!/bin/sh
-# THIS SCRIPT WILL BE AUTOMATICALLY RUN BY HYPRV
+# THIS SCRIPT WILL BE AUTOMATICALLY RUN BY HYPRTHEME
 
 source ./Colors
 DIR_PATH="$(dirname "$(realpath "$0")")"

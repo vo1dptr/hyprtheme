@@ -1,5 +1,5 @@
 #!/bin/sh
-# github.com/0x76OID/HyprV
+# github.com/0x76OID/hyprtheme
 
 source ./Colors
 
@@ -27,7 +27,7 @@ setup_theme() {
     # Copy configs
     if [ -d "$theme_path/config" ]; then
         cp -r "$theme_path/config/"* ~/.config
-        echo -e "${GREEN}Configs copied to ~/.config.${NC}"
+        echo -e "${GREEN}Configs copied to config folder.${NC}"
     fi
 
     # Install theme requirements
@@ -36,11 +36,36 @@ setup_theme() {
         echo -e "${GREEN}Theme requirements installed.${NC}"
     fi
 
-    # Execute HyprV_Run_This script if it exists
-    if [ -f "$theme_path/HyprV_Run_This" ]; then
-        chmod +x "$theme_path/HyprV_Run_This"
-        "$theme_path/HyprV_Run_This"
-        echo -e "${GREEN}HyprV_Run_This script executed.${NC}"
+    # Execute Hypr_RUN script if it exists
+    if [ -f "$theme_path/Hypr_RUN" ]; then
+        chmod +x "$theme_path/Hypr_RUN"
+        "$theme_path/Hypr_RUN"
+        echo -e "${GREEN}Hypr_RUN script executed.${NC}"
+    fi
+}
+
+# Uninstall themes
+uninstall_theme() {
+    echo -e "${BLUE}Available themes:${NC}"
+    themes=($(ls Themes))
+    for i in "${!themes[@]}"; do
+        echo "$((i+1)). ${themes[$i]}"
+    done
+
+    read -p "Select a theme to uninstall by number: " theme_choice
+    selected_theme=${themes[$((theme_choice-1))]}
+
+    echo -e "${YELLOW}Uninstalling theme: ${selected_theme}${NC}"
+
+    theme_path="Themes/$selected_theme"
+
+    # Execute Hypr_UNINSTALL script if it exists
+    if [ -f "$theme_path/Hypr_UNINSTALL" ]; then
+        chmod +x "$theme_path/Hypr_UNINSTALL"
+        "$theme_path/Hypr_UNINSTALL"
+        echo -e "${GREEN}Hypr_UNINSTALL script executed.${NC}"
+    else
+        echo -e "${RED}Hypr_UNINSTALL script not found. The theme owner did not provide an uninstall script. Please uninstall manually.${NC}"
     fi
 }
 
@@ -51,26 +76,27 @@ if [ "$EUID" -eq 0 ]; then
 fi
 
 echo -e "${MAGENTA}"
-cat << "HYPRV_L"
-/$$   /$$                               /$$    /$$
-| $$  | $$                              | $$   | $$
-| $$  | $$ /$$   /$$  /$$$$$$   /$$$$$$ | $$   | $$
-| $$$$$$$$| $$  | $$ /$$__  $$ /$$__  $$|  $$ / $$/
-| $$__  $$| $$  | $$| $$  \ $$| $$  \__/ \  $$ $$/
-| $$  | $$| $$  | $$| $$  | $$| $$        \  $$$/
-| $$  | $$|  $$$$$$$| $$$$$$$/| $$         \  $/
-|__/  |__/ \____  $$| $$____/ |__/          \_/
+cat << "HYPRTHEME_L"
+ /$$   /$$                            /$$$$$$$$ /$$
+| $$  | $$                           |__  $$__/| $$
+| $$  | $$ /$$   /$$  /$$$$$$   /$$$$$$ | $$   | $$$$$$$   /$$$$$$  /$$$$$$/$$$$   /$$$$$$ 
+| $$$$$$$$| $$  | $$ /$$__  $$ /$$__  $$| $$   | $$__  $$ /$$__  $$| $$_  $$_  $$ /$$__  $$
+| $$__  $$| $$  | $$| $$  \ $$| $$  \__/| $$   | $$  \ $$| $$$$$$$$| $$ \ $$ \ $$| $$$$$$$$
+| $$  | $$| $$  | $$| $$  | $$| $$      | $$   | $$  | $$| $$_____/| $$ | $$ | $$| $$_____/
+| $$  | $$|  $$$$$$$| $$$$$$$/| $$      | $$   | $$  | $$|  $$$$$$$| $$ | $$ | $$|  $$$$$$$
+|__/  |__/ \____  $$| $$____/ |__/      |__/   |__/  |__/ \_______/|__/ |__/ |__/ \_______/
            /$$  | $$| $$
           |  $$$$$$/| $$
            \______/ |__/
-HYPRV_L
+HYPRTHEME_L
 echo -e "${NC}"
 
 # Main menu
 echo -e "${BLUE}What do you want to do?${NC}"
 echo "1. Setup Hyprland"
 echo "2. Setup Themes"
-read -p "Enter your choice (1 or 2): " main_choice
+echo "3. Uninstall Theme"
+read -p "Enter your choice (1, 2, or 3): " main_choice
 
 case $main_choice in
     1)
@@ -105,6 +131,9 @@ case $main_choice in
         ;;
     2)
         setup_theme
+        ;;
+    3)
+        uninstall_theme
         ;;
     *)
         echo -e "${RED}Invalid choice. Exiting.${NC}"

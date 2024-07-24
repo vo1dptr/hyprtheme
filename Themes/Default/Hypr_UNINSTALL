@@ -1,0 +1,64 @@
+#!/bin/sh
+# UNINSTALL SCRIPT FOR THE DEFAULT THEME
+
+source ./Colors
+DIR_PATH="$(dirname "$(realpath "$0")")"
+
+ask_remove() {
+    read -p "Remove $1? (Y/n)" resp
+    [[ "$resp" =~ ^[Yy]$ ]]
+}
+
+# Ask to delete whole theme or selectively uninstall
+read -p "Delete whole theme configs with all tools? (Y/n) Not Recommended" del_all
+if [[ "$del_all" =~ ^[Yy]$ ]]; then
+    sudo pacman -Rns --noconfirm "$DIR_PATH"/Requirements/Requirements.txt
+    sudo rm -rf ~/.config/nvim /root/.config/nvim ~/.config/waybar ~/.config/waybar
+    sudo rm -rf ~/.vimrc /root/.vimrc
+    sudo rm -rf /usr/bin/lock /usr/bin/switch-wall
+    echo -e "${GREEN}Whole theme and tools removed.${NC}"
+else
+    # Requirements
+    if ask_remove "Neovim"; then
+        sudo pacman -Rns --noconfirm "$DIR_PATH"/Requirements/Requirements.txt
+    fi
+
+    # Neovim
+    if ask_remove "Neovim"; then
+        sudo pacman -Rns --noconfirm neovim ttf-jetbrains-mono-nerd
+        if ask_remove "Neovim config"; then
+            sudo rm -rf ~/.config/nvim /root/.config/nvim
+        fi
+    fi
+
+    # Vim Configuration
+    if ask_remove "Vim config"; then
+        sudo rm -rf ~/.vimrc /root/.vimrc
+    fi
+
+    # Waybar Configuration
+    if ask_remove "Waybar configs"; then
+        sudo rm -rf ~/.config/waybar/ ~/.config/waybar/
+    fi
+
+    # Additional Tools installed using Yay
+    if command -v yay >/dev/null 2>&1; then
+        for tool in swaylock swayidle wlogout swww; do
+            if ask_remove "$tool"; then
+                yay -Rns --noconfirm $tool
+            fi
+        done
+    fi
+
+    # Custom Tools
+    if ask_remove "custom tools in /usr/bin"; then
+        sudo rm -f /usr/bin/lock /usr/bin/switch-wall
+    fi
+
+    # Zsh Setup
+    if ask_remove "Zsh setup"; then
+        rm -rf ~/.zshrc* /root/.zshrc*
+    fi
+fi
+
+echo -e "${GREEN}Uninstallation process completed.${NC}"

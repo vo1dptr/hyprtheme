@@ -32,4 +32,4 @@ I haven't really changed much in the default config file except for some keybind
 
 </details>
 
-### Read `~/.config/hypr/hyprland.conf` OR Check the [wiki](https://wiki.hyprland.org/Configuring/Binds/) for more.
+### Read [hyprland config](config/hypr/hyprland.conf) file OR Check the [wiki](https://wiki.hyprland.org/Configuring/Binds/) for more.

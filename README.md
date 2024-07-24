@@ -1,11 +1,11 @@
-# HyprV - Hyprland Configuration Setup Script
-![HyprV](/assets/HyprV.png)
+# HyprTheme - Hyprland Configuration Setup Script
+![hyprtheme](/assets/hyprtheme.png)
 
-HyprV is an easy-to-use script to set up and customize Hyprland themes for Arch Linux, whether you are a newbie or just want to get a smoother experience.
+hyprtheme is an easy-to-use script to set up and customize Hyprland themes for Arch Linux, whether you are a newbie or just want to get a smoother experience.
 
 ## Features
-- **User-Friendly**: HyprV is beginner-friendly, with easy setup in customizing your Hyprland environment.
-- **Automation**: HyprV automates the setup process. There is no need to invest too much time and effort.
+- **User-Friendly**: hyprtheme is beginner-friendly, with easy setup in customizing your Hyprland environment.
+- **Automation**: hyprtheme automates the setup process. There is no need to invest too much time and effort.
 
 ## Getting Started
 
@@ -14,30 +14,30 @@ HyprV is an easy-to-use script to set up and customize Hyprland themes for Arch 
 
 1. **Clone the repository**:
 
-       git clone https://github.com/0x76OID/HyprV.git
+       git clone https://github.com/0x76OID/hyprtheme.git
 
 2. **Navigate to the repository directory**:
 
-       cd HyprV
+       cd hyprtheme
 
-3. **Make the HyprV script executable** if it isn't already:
+3. **Make the hyprtheme script executable** if it isn't already:
 
-       chmod +x HyprV.sh
+       chmod +x hyprtheme.sh
 
 4. **Run the setup script**:
 
-       ./HyprV.sh
+       ./hyprtheme.sh
 
 
 </details>
 
 ## Reporting Issues
-If you have any bugs or other issues you find, or if you have suggestions for me to improve, feel free to submit them [here](https://github.com/0x76OID/HyprV/issues).
+If you have any bugs or other issues you find, or if you have suggestions for me to improve, feel free to submit them [here](https://github.com/0x76OID/hyprtheme/issues).
 
 ## Contributing
 I appreciate contributions! For further information, please have a look in the [CONTRIBUTING](CONTRIBUTING.md) file.
 
-Thank you for using the HyprV Script! I hope you'll enjoy using Hyprland.
+Thank you for using the hyprtheme script! I hope you'll enjoy using Hyprland.
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
