@@ -5,12 +5,12 @@ source ./Colors
 DIR_PATH="$(dirname "$(realpath "$0")")"
 
 ask_remove() {
-    read -p "Remove $1? (Y/n)" resp
+    read -p "Remove $1? (Y/n) " resp
     [[ "$resp" =~ ^[Yy]$ ]]
 }
 
 # Ask to delete whole theme or selectively uninstall
-read -p "Delete whole theme configs with all tools? (Y/n) Not Recommended" del_all
+read -p "Delete whole theme configs with all tools? (Y/n) Not Recommended " del_all
 if [[ "$del_all" =~ ^[Yy]$ ]]; then
     sudo pacman -Rns --noconfirm "$DIR_PATH"/Requirements/Requirements.txt
     sudo rm -rf /root/.config/nvim ~/.config/nvim ~/.config/waybar ~/.config/wlogout ~/.config/alacritty ~/.config/neofetch ~/.config/swaylock ~/.config/wofi ~/.config/wall
