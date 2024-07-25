@@ -68,6 +68,7 @@ uninstall_theme() {
         echo -e "${GREEN}Hypr_UNINSTALL script executed.${NC}"
     else
         echo -e "${RED}Hypr_UNINSTALL script not found. The theme owner did not provide an uninstall script. Please uninstall manually.${NC}"
+        exit 1
     fi
 }
 
@@ -143,4 +144,4 @@ case $main_choice in
         ;;
 esac
 
-echo -e "\n\n${GREEN}Enjoy!!!${NC}"
+echo -e "\n\n${GREEN}Setup completed. Enjoy!${NC}"
