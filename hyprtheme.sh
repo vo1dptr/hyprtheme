@@ -24,10 +24,12 @@ setup_theme() {
 
     theme_path="Themes/$selected_theme"
 
-    # Copy configs
+    # Copy configs if the config folder exists
     if [ -d "$theme_path/config" ]; then
         cp -r "$theme_path/config/"* ~/.config
         echo -e "${GREEN}Configs copied to config folder.${NC}"
+    else
+        echo -e "${YELLOW}No config folder found. Skipping config copy.${NC}"
     fi
 
     # Install theme requirements
