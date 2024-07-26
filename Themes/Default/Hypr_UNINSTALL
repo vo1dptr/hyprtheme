@@ -5,7 +5,7 @@ source ./Colors
 DIR_PATH="$(dirname "$(realpath "$0")")"
 
 ask_remove() {
-    echo -ne "${BLUE}Remove $1? (Y/n) ${NC}"
+    echo -ne "${BLUE}\nRemove $1? (Y/n) ${NC}"
     read -r resp
     [[ "$resp" =~ ^[Yy]$ ]]
 }
@@ -100,7 +100,7 @@ case $uninstall_choice in
 
         # Requirements
         if ask_remove "Requirements"; then
-            sudo pacman -R yay
+            sudo pacman -R --noconfirm yay
             sudo pacman -Rns --noconfirm $(cat "$DIR_PATH"/Requirements/Requirements.txt)
         fi
 
@@ -140,7 +140,7 @@ case $uninstall_choice in
                 fi
             done
         fi
-        sudo pacman -R yay
+        sudo pacman -R --noconfirm yay
         sudo pacman -Rns --noconfirm $(cat "$DIR_PATH"/Requirements/Requirements.txt)
 
         ;;
