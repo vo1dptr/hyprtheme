@@ -9,6 +9,23 @@ install_pkgs() {
     sudo pacman -S --noconfirm $(cat "$requirements_file")
 }
 
+# Install yay
+install_yay() {
+    echo -e "${YELLOW}Installing dependencies for yay...${NC}"
+    sudo pacman -S --noconfirm git base-devel fakeroot
+
+    echo -e "${YELLOW}Installing yay...${NC}"
+    git clone https://aur.archlinux.org/yay.git && cd yay
+    if makepkg -si --noconfirm; then
+        echo -e "${GREEN}Yay installed successfully.${NC}"
+    else
+        echo -e "${RED}Failed to install yay.${NC}"
+        exit 1
+    fi
+    cd ..
+    rm -rf yay
+}
+
 # Set up themes
 setup_theme() {
     echo -e "${BLUE}Available themes:${NC}"
@@ -113,16 +130,14 @@ case $main_choice in
         # Install Yay if not already installed
         if ! command -v yay >/dev/null 2>&1; then
             echo -e "${YELLOW}Installing yay...${NC}"
-            git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm
-            cd ..
-            rm -rf yay
+            install_yay
             echo -e "${GREEN}Yay installed.${NC}"
         else
             echo -e "${GREEN}Yay is already installed.${NC}"
         fi
 
         # Install Hyprland using Yay
-        yay -S hyprland
+        yay -S --noconfirm hyprland
         echo -e "${GREEN}Hyprland installed.${NC}"
 
         # Install Nvidia drivers if needed
@@ -144,4 +159,6 @@ case $main_choice in
         ;;
 esac
 
-echo -e "\n\n${GREEN}Setup completed. Enjoy!${NC}"
+if [ "$main_choice" -ne 3 ]; then
+    echo -e "\n\n${GREEN}Setup completed. Enjoy!${NC}"
+fi

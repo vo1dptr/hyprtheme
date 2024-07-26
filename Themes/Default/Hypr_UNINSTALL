@@ -5,7 +5,8 @@ source ./Colors
 DIR_PATH="$(dirname "$(realpath "$0")")"
 
 ask_remove() {
-    read -p "Remove $1? (Y/n) " resp
+    echo -ne "${BLUE}Remove $1? (Y/n) ${NC}"
+    read -r resp
     [[ "$resp" =~ ^[Yy]$ ]]
 }
 
@@ -20,95 +21,133 @@ install_yay() {
     echo -e "${GREEN}Yay installed.${NC}"
 }
 
-# Ask to delete whole theme or selectively uninstall
-read -p "Delete whole theme configs with all tools? (Y/n) Not Recommended " del_all
-if [[ "$del_all" =~ ^[Yy]$ ]]; then
-    sudo pacman -Rns --noconfirm - < "$DIR_PATH"/Requirements/Requirements.txt
-    sudo rm -rf /root/.config/nvim ~/.config/nvim ~/.config/waybar ~/.config/wlogout ~/.config/alacritty ~/.config/neofetch ~/.config/swaylock ~/.config/wofi ~/.config/wall
-    sudo rm -rf ~/.vimrc /root/.vimrc
-    sudo rm -rf /usr/bin/lock /usr/bin/switch-wall
-    echo -e "${GREEN}Whole theme and tools removed.${NC}"
-else
-    # Requirements
-    if ask_remove "Requirements"; then
-        sudo pacman -Rns --noconfirm - < "$DIR_PATH"/Requirements/Requirements.txt
-    fi
+# Main menu
+echo -e "${BLUE}Choose an option:${NC}"
+echo "1. Selectively uninstall"
+echo "2. Delete whole theme configs with all tools (Not Recommended)"
+read -p "Enter your choice (1 or 2): " uninstall_choice
 
-    # Neovim
-    if ask_remove "Neovim"; then
-        sudo pacman -Rns --noconfirm neovim ttf-jetbrains-mono-nerd
-        if ask_remove "Neovim config"; then
-            sudo rm -rf ~/.config/nvim /root/.config/nvim 2>/dev/null
-        fi
-    fi
+case $uninstall_choice in
+    1)
+        # Selective uninstall
+        echo -e "${YELLOW}Performing selective uninstallation...${NC}"
 
-    # Vim Configuration
-    if ask_remove "Vim config"; then
-        sudo rm -rf ~/.vimrc /root/.vimrc 2>/dev/null
-    fi
-
-    # Waybar Configuration
-    if ask_remove "Waybar configs"; then
-        rm -rf ~/.config/waybar/ 2>/dev/null
-    fi
-
-    # Wlogout Configuration
-    if ask_remove "Wlogout configs"; then
-        rm -rf ~/.config/wlogout/ 2>/dev/null
-    fi
-
-    # Alacritty Configuration
-    if ask_remove "Alacritty configs"; then
-        rm -rf ~/.config/alacritty/ 2>/dev/null
-    fi
-
-    # Neofetch Configuration
-    if ask_remove "Neofetch configs"; then
-        rm -rf ~/.config/neofetch/ 2>/dev/null
-    fi
-
-    # Swaylock Configuration
-    if ask_remove "Swaylock configs"; then
-        rm -rf ~/.config/swaylock/ 2>/dev/null
-    fi
-
-    # Wofi Configuration
-    if ask_remove "Wofi configs"; then
-        rm -rf ~/.config/wofi/ 2>/dev/null
-    fi
-
-    # Wallpapers
-    if ask_remove "Wallpapers"; then
-        rm -rf ~/.config/wall 2>/dev/null
-    fi
-
-    # Additional Tools installed using Yay
-    if ! command -v yay >/dev/null 2>&1; then
-        read -p "Yay is not installed. Do you want to install yay? (Y/n) " install_yay_resp
-        if [[ "$install_yay_resp" =~ ^[Yy]$ ]]; then
-            install_yay
-        else
-            echo -e "${YELLOW}Skipping yay tools removal as yay is not installed.${NC}"
-        fi
-    fi
-
-    if command -v yay >/dev/null 2>&1; then
-        for tools in swaylock swayidle wlogout swww; do
-            if ask_remove "$tools"; then
-                yay -Rns --noconfirm $tools
+        # Neovim
+        if ask_remove "Neovim"; then
+            sudo pacman -Rns --noconfirm neovim ttf-jetbrains-mono-nerd
+            if ask_remove "Neovim config"; then
+                sudo rm -rf ~/.config/nvim /root/.config/nvim 2>/dev/null
             fi
-        done
-    fi
+        fi
 
-    # Custom Tools
-    if ask_remove "custom tools in /usr/bin"; then
-        sudo rm -f /usr/bin/lock /usr/bin/switch-wall 2>/dev/null
-    fi
+        # Vim Configuration
+        if ask_remove "Vim config"; then
+            sudo rm -rf ~/.vimrc /root/.vimrc 2>/dev/null
+        fi
 
-    # Zsh Setup
-    if ask_remove "Zsh setup"; then
-        sudo rm -rf ~/.zshrc* /root/.zshrc* 2>/dev/null
-    fi
-fi
+        # Waybar Configuration
+        if ask_remove "Waybar configs"; then
+            rm -rf ~/.config/waybar/ 2>/dev/null
+        fi
+
+        # Wlogout Configuration
+        if ask_remove "Wlogout configs"; then
+            rm -rf ~/.config/wlogout/ 2>/dev/null
+        fi
+
+        # Alacritty Configuration
+        if ask_remove "Alacritty configs"; then
+            rm -rf ~/.config/alacritty/ 2>/dev/null
+        fi
+
+        # Neofetch Configuration
+        if ask_remove "Neofetch configs"; then
+            rm -rf ~/.config/neofetch/ 2>/dev/null
+        fi
+
+        # Swaylock Configuration
+        if ask_remove "Swaylock configs"; then
+            rm -rf ~/.config/swaylock/ 2>/dev/null
+        fi
+
+        # Wofi Configuration
+        if ask_remove "Wofi configs"; then
+            rm -rf ~/.config/wofi/ 2>/dev/null
+        fi
+
+        # Wallpapers
+        if ask_remove "Wallpapers"; then
+            rm -rf ~/.config/wall 2>/dev/null
+        fi
+
+        # Additional Tools installed using Yay
+        if ! command -v yay >/dev/null 2>&1; then
+            read -p "Yay is not installed. Do you want to install yay? (Y/n) " install_yay_resp
+            if [[ "$install_yay_resp" =~ ^[Yy]$ ]]; then
+                install_yay
+            else
+                echo -e "${YELLOW}Skipping yay tools removal as yay is not installed.${NC}"
+            fi
+        fi
+
+        if command -v yay >/dev/null 2>&1; then
+            for tools in swaylock swayidle wlogout swww; do
+                if ask_remove "$tools"; then
+                    yay -Rns --noconfirm $tools
+                fi
+            done
+        fi
+
+        # Requirements
+        if ask_remove "Requirements"; then
+            sudo pacman -R yay
+            sudo pacman -Rns --noconfirm $(cat "$DIR_PATH"/Requirements/Requirements.txt)
+        fi
+
+        # Custom Tools
+        if ask_remove "custom tools in /usr/bin"; then
+            sudo rm -f /usr/bin/lock /usr/bin/switch-wall 2>/dev/null
+        fi
+
+        # Zsh Setup
+        if ask_remove "Zsh setup"; then
+            sudo rm -rf ~/.zshrc* /root/.zshrc* 2>/dev/null
+        fi
+        ;;
+    2)
+        # Complete removal
+        echo -e "${YELLOW}Performing complete removal...${NC}"
+
+        sudo rm -rf /root/.config/nvim ~/.config/nvim ~/.config/waybar ~/.config/wlogout ~/.config/alacritty ~/.config/neofetch ~/.config/swaylock ~/.config/wofi ~/.config/wall
+        sudo rm -rf ~/.vimrc /root/.vimrc
+        sudo rm -f /usr/bin/lock /usr/bin/switch-wall
+        echo -e "${GREEN}Whole theme and tools removed.${NC}"
+
+        # Additional Tools installed using Yay
+        if ! command -v yay >/dev/null 2>&1; then
+            read -p "Yay is not installed. Do you want to install yay? (Y/n) " install_yay_resp
+            if [[ "$install_yay_resp" =~ ^[Yy]$ ]]; then
+                install_yay
+            else
+                echo -e "${YELLOW}Skipping yay tools removal as yay is not installed.${NC}"
+            fi
+        fi
+
+        if command -v yay >/dev/null 2>&1; then
+            for tools in swaylock swayidle wlogout swww; do
+                if ask_remove "$tools"; then
+                    yay -Rns --noconfirm $tools
+                fi
+            done
+        fi
+        sudo pacman -R yay
+        sudo pacman -Rns --noconfirm $(cat "$DIR_PATH"/Requirements/Requirements.txt)
+
+        ;;
+    *)
+        echo -e "${RED}Invalid choice. Exiting.${NC}"
+        exit 1
+        ;;
+esac
 
 echo -e "${GREEN}Uninstallation process completed.${NC}"

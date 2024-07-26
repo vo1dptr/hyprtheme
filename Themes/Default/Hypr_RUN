@@ -4,6 +4,22 @@
 source ./Colors
 DIR_PATH="$(dirname "$(realpath "$0")")"
 
+install_yay() {
+    echo -e "${YELLOW}Installing dependencies for yay...${NC}"
+    sudo pacman -S --noconfirm git base-devel fakeroot
+
+    echo -e "${YELLOW}Installing yay...${NC}"
+    git clone https://aur.archlinux.org/yay.git && cd yay
+    if makepkg -si --noconfirm; then
+        echo -e "${GREEN}Yay installed successfully.${NC}"
+    else
+        echo -e "${RED}Failed to install yay.${NC}"
+        exit 1
+    fi
+    cd ..
+    rm -rf yay
+}
+
 # Install Neovim
 read -p "Do you want to install Neovim? (Y/n) " install_neovim_choice
 if [[ "$install_neovim_choice" =~ ^[Yy]$ ]]; then
@@ -40,11 +56,12 @@ ln -s "/home/$USER/.config/waybar/configs/[TOP] Default Laptop_v2" ~/.config/way
 
 # Install Yay if not already installed
 if ! command -v yay >/dev/null 2>&1; then
-    echo -e "${YELLOW}Installing yay...${NC}"
-    git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm
-    cd ..
-    rm -rf yay
-    echo -e "${GREEN}Yay installed.${NC}"
+    read -p "Yay is not installed. Do you want to install yay? (Y/n) " install_yay_resp
+    if [[ "$install_yay_resp" =~ ^[Yy]$ ]]; then
+        install_yay
+    else
+        echo -e "${YELLOW}Skipping yay tools installation as yay is not installed.${NC}"
+    fi
 else
     echo -e "${GREEN}Yay is already installed.${NC}"
 fi
@@ -52,8 +69,12 @@ fi
 # Install additional tools using Yay
 read -p "Do you want to install additional tools (swaylock, swayidle, wlogout, swww)? (Y/n) " install_tools_choice
 if [[ "$install_tools_choice" =~ ^[Yy]$ ]]; then
-    yay -S swaylock swayidle wlogout swww
-    echo -e "${GREEN}Additional tools installed.${NC}"
+    if command -v yay >/dev/null 2>&1; then
+        yay -S swaylock swayidle wlogout swww
+        echo -e "${GREEN}Additional tools installed.${NC}"
+    else
+        echo -e "${RED}Yay is not installed. Unable to install additional tools.${NC}"
+    fi
 fi
 
 # Move custom tools to /usr/bin
