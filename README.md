@@ -1,7 +1,7 @@
 # HyprTheme - Hyprland Configuration Setup Script
 ![hyprtheme](/assets/hyprtheme.png)
 
-**HyprTheme is an easy-to-use script for setting up and customizing Hyprland themes on ArchLinux / Arch-Based Distros. Whether you're a newbie or just want a smoother experience, this script is designed to simplify your setup.**
+**HyprTheme is an easy-to-use shell script for setting up and customizing Hyprland themes on ArchLinux / Arch-Based Distros. Whether you're a newbie or just want a smoother experience, this script is designed to simplify your setup.**
 
 ## Goals and Features
 <details>
@@ -42,11 +42,11 @@
 
 3. **Make the HyprTheme script executable** if it isn't already:
 
-       chmod +x hyprtheme.sh
+       chmod +x hyprtheme
 
 4. **Run the setup script**:
 
-       ./hyprtheme.sh
+       ./hyprtheme
 
 ### Option 2: Download and Install from Zip
 
@@ -72,11 +72,11 @@
 
 4. **Make the HyprTheme script executable** if it isn't already:
 
-       chmod +x hyprtheme.sh
+       chmod +x hyprtheme
 
 5. **Run the setup script**:
 
-       ./hyprtheme.sh
+       ./hyprtheme
 
 </details>
 
@@ -94,7 +94,7 @@ Let’s explain what HyprTheme does and what it changes. While I can’t specify
    - **Hypr_RUN**: This script, when present in the theme's folder, is run once. It can perform several tasks specific to that theme. For an example, see [here](Themes/Default/Hypr_RUN).
    - **Hypr_UNINSTALL**: This script, if present in the theme's folder, runs when you uninstall the theme, cleaning up its specific configurations and dependencies. For an example, see [here](Themes/Default/Hypr_UNINSTALL).
 
-**Check the [Default](Themes/Default) theme as it’s a great example, and the [HyprTheme](hyprtheme.sh) script. Hope this helps!**
+**Check the [Default](Themes/Default) theme as it’s a great example, and the [HyprTheme](hyprtheme) script. Hope this helps!**
 </details>
 
 ## Reporting Issues
