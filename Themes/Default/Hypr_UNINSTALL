@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # UNINSTALL SCRIPT FOR THE DEFAULT THEME
 
 source ./Colors

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # THIS SCRIPT WILL BE AUTOMATICALLY RUN BY HYPRTHEME
 
 source ./Colors
