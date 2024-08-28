@@ -1,1 +1,1 @@
-alacritty ttf-font-awesome waybar neofetch noto-fonts-emoji noto-fonts noto-fonts-cjk git
+alacritty ttf-font-awesome ttf-jetbrains-mono-nerd waybar neofetch noto-fonts-emoji noto-fonts noto-fonts-cjk git
