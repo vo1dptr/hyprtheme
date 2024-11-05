@@ -53,10 +53,12 @@ Welcome to the contribution guidelines for hyprtheme! I appreciate your interest
 
   - Create a pull request to submit your contribution.
 
-### Note: Your pull request will be reviewed and merged as quickly as possible.
+**Your pull request will be reviewed and merged as quickly as possible.**
 </details>
 
-Your contributions are paramount to the success of the project. Thanks to everyone that takes their time and effort to try and make hyprtheme better—very much appreciated!
+---
+
+**Every contribution makes HyprTheme even better. Thanks to everyone who puts in time and effort to improve it. Your work means a lot!**
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
