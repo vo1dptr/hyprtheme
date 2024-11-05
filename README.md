@@ -1,7 +1,11 @@
 # HyprTheme - Hyprland Configuration Setup Script
 ![hyprtheme](/assets/hyprtheme.png)
 
-**HyprTheme is an easy-to-use shell script for setting up and customizing Hyprland themes on ArchLinux / Arch-Based Distros. Whether you're a newbie or just want a smoother experience, this script is designed to simplify your setup.**
+**HyprTheme is an easy-to-use shell script for setting up and customizing Hyprland themes on ArchLinux / Arch-Based Distros. This script is designed to simplify your setup.**
+
+## Personal Dotfiles and Contributions
+
+You can use your personal or favorite dotfiles from anywhere on the internet. Simply edit them to automate with the HyprTheme script, and apply them to your setup. If you'd like, you can also contribute your dotfiles to this repository for others to use! If you don’t have any dotfiles of your own, feel free to start with the "default" dotfiles included in HyprTheme, and modify them as you like.
 
 ## Goals and Features
 <details>
@@ -34,7 +38,7 @@
 
 1. **Clone the repository**:
 
-       git clone https://github.com/0x76OID/hyprtheme.git
+       git clone https://github.com/vo1dptr/hyprtheme.git
 
 2. **Navigate to the repository directory**:
 
@@ -54,13 +58,13 @@
 
    - Using `wget`:
 
-         wget https://github.com/0x76OID/hyprtheme/archive/refs/heads/main.zip
+         wget https://github.com/vo1dptr/hyprtheme/archive/refs/heads/main.zip
 
    - Using `curl`:
 
-         curl -LO https://github.com/0x76OID/hyprtheme/archive/refs/heads/main.zip
+         curl -LO https://github.com/vo1dptr/hyprtheme/archive/refs/heads/main.zip
 
-   - Or download it directly from the [GitHub repository](https://github.com/0x76OID/hyprtheme/archive/refs/heads/main.zip) using your web browser.
+   - Or download it directly from the [GitHub repository](https://github.com/vo1dptr/hyprtheme/archive/refs/heads/main.zip) using your web browser.
 
 2. **Extract the zip file**:
 
@@ -98,7 +102,7 @@ Let’s explain what HyprTheme does and what it changes. While I can’t specify
 </details>
 
 ## Reporting Issues
-If you encounter any bugs or have suggestions for improvement, feel free to submit them [here](https://github.com/0x76OID/hyprtheme/issues).
+If you encounter any bugs or have suggestions for improvement, feel free to submit them [here](https://github.com/vo1dptr/hyprtheme/issues).
 
 ## Contributing
 I appreciate contributions! For further information, please have a look at the [CONTRIBUTING](CONTRIBUTING.md) file.
