@@ -3,9 +3,9 @@
 
 **HyprTheme is an easy-to-use shell script for setting up and customizing Hyprland themes on ArchLinux / Arch-Based Distros. This script is designed to simplify your setup.**
 
-## Personal Dotfiles and Contributions
+**You can use your personal or favorite dotfiles from anywhere on the internet. Simply edit them to automate with the HyprTheme script, and apply them to your setup. If you'd like, you can also contribute your dotfiles to this repository for others to use! If you don’t have any dotfiles of your own, feel free to start with the "default" dotfiles included in HyprTheme, and modify them as you like.**
 
-You can use your personal or favorite dotfiles from anywhere on the internet. Simply edit them to automate with the HyprTheme script, and apply them to your setup. If you'd like, you can also contribute your dotfiles to this repository for others to use! If you don’t have any dotfiles of your own, feel free to start with the "default" dotfiles included in HyprTheme, and modify them as you like.
+---
 
 ## Goals and Features
 <details>
